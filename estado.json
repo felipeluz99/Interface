@@ -1,0 +1,22 @@
+[
+    {
+        "luzes": [
+            {
+                "luz sala": "acesa",
+                "luz cozinha": "acesa",
+                "luz quarto": "apagada",
+                "luz banheiro": "acesa"
+            }
+        ]
+    },
+    {
+        "temperatura": 25
+    },
+    {
+        "umidade": 20,
+        "janela": "aberta"
+    },
+    {
+        "modo": "auto"
+    }
+]

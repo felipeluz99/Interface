@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página inicial</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="cabecalho">
+      <h1>Sistema de Controle</h1>
+      <a href="/settings">Configurações</a>
+    </div>
+    <div class="modo">
+      <h2>Modo</h2>
+      <p>Auto</p>
+      {% if estado[3].modo == "auto" %}
+        <a href="/altera_modo/{{ estado[3].modo }}">On</a>
+      {% else %}
+        <a href="/altera_modo/{{ estado[3].modo }}">Off</a>
+      {% endif %}
+    </div>
+    <div class="luzes">
+      <h2>Luzes</h2>
+      {% for luz, estado in estado[0].luzes[0].items() %}
+        <p>{{ luz }}: <a href="altera_luz/{{ luz }}/{{ estado }}">{{ estado }}</a></p>
+      {% endfor %}
+    </div>
+    <div class="info">
+      <div class="temperatura">
+        <h2>Temperatura</h2>
+        <h3>{{ estado[1].temperatura }}</h3>
+        <a href="/altera_temp/{{ estado[1].temperatura }}/up">Aumentar</a>
+        <a href="/altera_temp/{{ estado[1].temperatura }}/down">Diminuir</a>
+      </div>
+      <div class="umidade">
+        <h2>Umidade</h2>
+        <h3>{{estado[2].umidade}}%</h3>
+        <h3>Janela: {{estado[2].janela}}</h3>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
