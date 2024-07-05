@@ -2,21 +2,21 @@
     {
         "luzes": [
             {
-                "luz sala": "acesa",
-                "luz cozinha": "acesa",
-                "luz quarto": "apagada",
-                "luz banheiro": "acesa"
+                "Luz sala": "apagada",
+                "Luz cozinha": "apagada",
+                "Luz quarto": "apagada",
+                "Luz banheiro": "acesa"
             }
         ]
     },
     {
-        "temperatura": 25
+        "temperatura": 23
     },
     {
         "umidade": 20,
-        "janela": "aberta"
+        "janela": "fechada"
     },
     {
-        "modo": "auto"
+        "modo": "manual"
     }
 ]

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa do Tempo</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+    /* Definir o tamanho do mapa para ocupar toda a página */
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    #map {
+        height: 100%; /* Altura 100% da janela do navegador */
+    }
+    
+    /* Estilo para aplicar filtro de cor azul */
+    .blue-overlay {
+        filter: saturate(200%) brightness(120%) hue-rotate(180deg); /* Ajusta a saturação, brilho e matiz para tons de azul */
+    }
+
+    /* Estilo para camada de contorno branca */
+    .precipitation-outline {
+        -webkit-filter: contrast(200%); /* Aumenta o contraste */
+        filter: contrast(200%);
+        opacity: 0.7; /* Opacidade reduzida para mostrar a camada de precipitação abaixo */
+    }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([55.8642, -4.2518], 10); // Definir a visualização inicial do mapa (latitude, longitude, zoom)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    // Adicionar a camada de precipitação do OpenWeatherMap
+    var precipitationLayer = L.tileLayer('https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=b2e13de0494d15838803adaf4b1182ce', {
+        maxZoom: 19,
+        opacity: 0.8  // Aumentando a opacidade para tornar a camada de precipitação mais visível
+    }).addTo(map);
+
+    // Adicionar camada de contorno branca sobre a camada de precipitação
+    var outlineLayer = L.tileLayer('https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=b2e13de0494d15838803adaf4b1182ce', {
+        maxZoom: 19,
+        className: 'precipitation-outline'  // Aplicando classe CSS para o contorno
+    }).addTo(map);
+</script>
+</body>
+</html>

@@ -8,39 +8,51 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <div class="cabecalho">
-      <h1>Sistema de Controle</h1>
-      <a href="/settings">Configurações</a>
-    </div>
-    <div class="modo">
-      <h2>Modo</h2>
-      <p>Auto</p>
-      {% if estado[3].modo == "auto" %}
-        <a href="/altera_modo/{{ estado[3].modo }}">On</a>
-      {% else %}
-        <a href="/altera_modo/{{ estado[3].modo }}">Off</a>
-      {% endif %}
-    </div>
-    <div class="luzes">
-      <h2>Luzes</h2>
-      {% for luz, estado in estado[0].luzes[0].items() %}
-        <p>{{ luz }}: <a href="altera_luz/{{ luz }}/{{ estado }}">{{ estado }}</a></p>
-      {% endfor %}
-    </div>
-    <div class="info">
-      <div class="temperatura">
-        <h2>Temperatura</h2>
-        <h3>{{ estado[1].temperatura }}</h3>
-        <a href="/altera_temp/{{ estado[1].temperatura }}/up">Aumentar</a>
-        <a href="/altera_temp/{{ estado[1].temperatura }}/down">Diminuir</a>
-      </div>
-      <div class="umidade">
-        <h2>Umidade</h2>
-        <h3>{{estado[2].umidade}}%</h3>
-        <h3>Janela: {{estado[2].janela}}</h3>
-      </div>
+<div class="container">
+<div class="cabecalho">
+  <h1>Sistema de Controle</h1>
+  <a href="/settings">Configurações</a>
+</div>
+<div class="modo">
+  <h2>Modo</h2>
+  <p>Auto</p>
+  {% if estado[3].modo == "auto" %}
+    <a href="/altera_modo/{{ estado[3].modo }}">On</a>
+  {% else %}
+    <a href="/altera_modo/{{ estado[3].modo }}">Off</a>
+  {% endif %}
+</div>
+<div class="luzes">
+  <h2>Luzes</h2>
+  {% for luz, estado in estado[0].luzes[0].items() %}
+    <p>{{ luz }}: <a href="altera_luz/{{ luz }}/{{ estado }}">{{ estado }}</a></p>
+  {% endfor %}
+</div>
+<div class="info">
+  <div class="temperatura">
+    <h2>Temperatura</h2>
+    <h1>{{ estado[1].temperatura }}°C</h1>
+    <a href="/altera_temp/{{ estado[1].temperatura }}/up">Aumentar</a>
+    <a href="/altera_temp/{{ estado[1].temperatura }}/down">Diminuir</a>
+  </div>
+  <div class="umidade">
+    <h2>Umidade</h2>
+    <h1>{{previsao.umidade}}%</h1>
+    <h3>Janela: <a href="/altera_janela/{{estado[2].janela}}">{{estado[2].janela}}</a></h3>
+  </div>
+</div>
+<div class="previsao">
+  <h2>Previsão do tempo</h2>
+  <h3>{{previsao.cidade}}, {{previsao.data}}</h3>
+  <div class="previsao-conteudo">
+    <img src="/static/pics/{{ 'tempo_aberto.png' if previsao.tipo_tempo == 'Clear' else 'tempo_nublado.png' if previsao.tipo_tempo == 'Cloudy' else 'tempo_chuvoso.png' }}" width=100px height=100px>
+    <div class="temp-atual">{{previsao.temp_atual}}°C</div>
+    <div class="temp-extremas">
+      <h4>Máx {{previsao.temp_max}}°C</h4>
+      <h4>Mín {{previsao.temp_min}}°C</h4>
     </div>
   </div>
+</div>
+</div>
 </body>
 </html>
